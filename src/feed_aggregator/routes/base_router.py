@@ -13,13 +13,6 @@ class RouterConfig:
 
 
 class APIRouterFactory:
-    # _SECURITY_HEADERS = {
-    #     "X-Content-Type-Options": "nosniff",
-    #     "X-Frame-Options": "DENY",
-    #     "X-XSS-Protection": "1; mode=block",
-    #     "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-    # }
-    
      # Standard error responses
     _BASE_RESPONSES = {
         404: {"description": "Not found"},
@@ -56,21 +49,3 @@ class APIRouterFactory:
             tags=[config.tag],
             responses=responses
         )
-        
-        # return APIRouter(
-        #     prefix=config.prefix,
-        #     tags=[config.tag],
-        #     responses=responses,
-        #     default_response_class=cls._create_secure_response(),
-        # )
-    
-    @classmethod
-    def _create_secure_response(cls):
-        from fastapi.responses import JSONResponse
-        
-        class SecureJSONResponse(JSONResponse):
-            def __init__(self, *args, **kwargs):
-                super().__init__(*args, **kwargs)
-                self.headers.update(cls._SECURITY_HEADERS)
-                
-        return SecureJSONResponse

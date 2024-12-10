@@ -1,6 +1,5 @@
+import os
 import uvicorn
-from feed_aggregator.app import APIAppBuilder
-
 
 def main():
     """Entry point for the application."""
@@ -11,7 +10,8 @@ def main():
         port=8000,
         reload=True,
         workers=4,
-        log_level="info"
+        log_level="debug" if os.getenv("DEBUG", "info").lower() == "debug" else "info",
+        server_header=False,
     )
 
 

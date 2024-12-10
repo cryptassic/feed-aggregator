@@ -7,12 +7,11 @@ from .base_router import APIRouterFactory, RouterConfig
 from .default import router as default_router
 
 
-
 class RouterRegistry:
     """Registry for managing all API routes."""
     
     AVAILABLE_ROUTES: Dict[str, APIRouter] = {
-        "health": default_router,
+        "test": default_router,
         # Add new routers here with their identifiers
     }
     
@@ -24,14 +23,6 @@ class RouterRegistry:
         Returns:
             APIRouter: Configured main router with all routes
         """
-        # main_router = APIRouter(
-        #     prefix="/v1",
-        #     responses={
-        #         404: {"description": "Not found"},
-        #         500: {"description": "Internal server error"},
-        #         503: {"description": "Service unavailable"}
-        #     }
-        # )
         
         main_router = APIRouterFactory.create_router(RouterConfig(
             tag="root",
